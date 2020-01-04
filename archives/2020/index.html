@@ -1,21 +1,24 @@
-<!DOCTYPE HTML>
-<html>
+<%- partial('_partial/head') %>
 
-<head>
-	<link rel="bookmark"  type="image/x-icon"  href="<%- theme.head.favicon %>"/>
-	<link rel="shortcut icon" href="<%- theme.head.favicon %>">
-	<% if(page.layout === 'gallery') { %>
-		<%- partial('_partial/gallery_head', {}, {cache: true}) %>
-	<% } else { %>
-			<%- partial('_partial/head', {}, {cache: true}) %>
-			<%- partial('_partial/importJS', {}, {cache: true}) %>
-	<% } %>
-</head>
-    <% if(page.layout === 'gallery') { %>
-        <!-- Single Gallery Page -->
-        <%- partial('_widget/page-gallery', {}, {cache: true}) %>
-        
-    <% } else { %>
-		<%- body %>
- 	<% } %>
+<body>
+  <div id="app">
+    <main class="content">
+      <%- body %>
+      <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+    <div class="to_top">
+        <%- partial('_partial/totop') %>
+      </div>
+    </main>
+    <% if (theme.toc && is_post()){ %>
+    <aside class="sidebar">
+      <% } else { %>
+      <aside class="sidebar">
+        <% } %>
+        <%- partial('_partial/sidebar') %>
+      </aside>
+      <%- partial('_partial/modal') %>
+      <%- partial('_partial/after-footer') %>
+  </div>
+</body>
+
 </html>
